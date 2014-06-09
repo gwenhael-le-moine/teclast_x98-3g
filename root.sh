@@ -34,8 +34,12 @@ rm -fr assets/
 echo 'Rooting'
 $ADB root && \
 $ADB remount && \
+echo 'connection to device though adb established' && \
 $ADB push $CWD/bins/su /system/xbin/ && \
 $ADB shell chmod 6755 /system/xbin/su && \
+echo 'su binary installed' && \
 $ADB push $CWD/APKs/$SU_APK /system/app/ && \
 $ADB shell chmod 6755 /system/app/$SU_APK && \
+echo 'Superuser app installed' && \
+echo 'Rebooting device' && \
 $ADB reboot
