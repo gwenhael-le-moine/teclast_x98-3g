@@ -15,7 +15,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 CWD=$(pwd)
-ADB=$(which adb)
+ADB=${ADB:-$(which adb)}
 
 mkdir -p $CWD/{APKs,bins}/
 
