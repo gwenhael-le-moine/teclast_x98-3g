@@ -20,22 +20,22 @@ ADB=${ADB:-$(which adb)}
 mkdir -p $CWD/{APKs,bins}/
 
 echo 'Getting Koush Superuser from F-Droid'
-APK=com.koushikdutta.superuser_1030.apk
-[ -e $CWD/APKs/$APK ] || wget -c https://f-droid.org/repo/$APK -O $CWD/APKs/$APK
+SU_APK=com.koushikdutta.superuser_1030.apk
+[ -e $CWD/APKs/$SU_APK ] || wget -c https://f-droid.org/repo/$SU_APK -O $CWD/APKs/$SU_APK
 
 echo 'extracting su binary'
-unzip  $APK assets/x86/su
+unzip  $SU_APK assets/x86/su
 mv assets/x86/su $CWD/bins/
 rm -fr assets/
 
 [ -e $CWD/bins/su ] || exit 1
-[ -e $CWD/$APK ] || exit 1
+[ -e $CWD/APKs/$SU_APK ] || exit 1
 
 echo 'Rooting'
 $ADB root && \
 $ADB remount && \
 $ADB push $CWD/bins/su /system/xbin/ && \
 $ADB shell chmod 6755 /system/xbin/su && \
-$ADB push $CWD/APKs/$APK /system/app/ && \
-$ADB shell chmod 6755 /system/app/$APK && \
+$ADB push $CWD/APKs/$SU_APK /system/app/ && \
+$ADB shell chmod 6755 /system/app/$SU_APK && \
 $ADB reboot
