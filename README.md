@@ -6,3 +6,7 @@ tools and stuff for the Teclast X98 3G tablet [ http://www.teclast.com/en/zt/X98
 * root.sh
   Root the tablet.
   Usage: plug the tablet to the computer, enable USB debugging and launch this script
+
+* chrooted-Slackware
+  Run Slackware in a chroot, see chrooted-Slackware/README.org for instructions
+  
