@@ -1,0 +1,33 @@
+1. create disk image (4GiB max on FAT32)
+   dd if=/dev/zero of=./slackchroot.img bs=1024k count=4000
+   mkfs.ext4 -F ./slackchroot.img
+
+2. create mountpoint
+   mkdir ./mnt
+
+3. mount image
+   mount -o loop ./slackchroot.img ./mnt
+
+4. edit build_miniroot.sh script
+   sed -i "s|/tmp/miniroot/|$(pwd)/mnt|g" build_miniroot.sh
+
+5. compress image
+   gzip -9 ./slackchroot.img
+
+6. transfer to device
+   adb shell mkdir /sdcard/Slackware/
+   adb shell mkdir /sdcard/Slackware/mnt/
+   adb push ./slackchroot.img.gz /sdcard/Slackware/
+   adb push ./stop-chroot.sh /sdcard/Slackware/
+   adb push ./start-chroot.sh /sdcard/Slackware/
+
+Then, on device
+7. launch chroot
+   su
+   cd /sdcard/Slackware/
+   /system/bin/sh ./start-chroot.sh
+
+8. umount (stop) chroot
+   su
+   cd /sdcard/Slackware/
+   /system/bin/sh ./stop-chroot.sh
