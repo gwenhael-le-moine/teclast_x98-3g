@@ -1,2 +1,4 @@
 *.apk
 su
+/system/
+/gapps-jb-20130812-signed.zip
