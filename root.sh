@@ -24,7 +24,7 @@ SU_APK=com.koushikdutta.superuser_1030.apk
 [ -e $CWD/APKs/$SU_APK ] || wget -c https://f-droid.org/repo/$SU_APK -O $CWD/APKs/$SU_APK
 
 echo 'extracting su binary'
-unzip  $SU_APK assets/x86/su
+unzip  $CWD/APKs/$SU_APK assets/x86/su
 mv assets/x86/su $CWD/bins/
 rm -fr assets/
 
